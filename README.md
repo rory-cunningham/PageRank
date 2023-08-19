@@ -1,10 +1,18 @@
 # PageRank
-PageRank is Google’s algorithm to rank the search results that match the queried keywords. The algorithm
-models the internet as a directed graph where web pages are represented as vertices and links between pages are
-edges. The PageRank algorithm calculates the likelihood, or rank, that a page will be visited by people surfing
-the web. The rank of a page depends on the rank of the pages that link to it, where pages that are frequently
-pointed to tend to gain a higher rank. Also, pages pointed to by highly ranked pages tend to receive a higher rank.
-The algorithm is itself quite simple but in practice it captures well the appreciation of the importance of pages by
-humans.
+This directory holds code files for the graph processing problem. It implements routines to solve the PageRank problem and the Connected Components problem. The latter is valid only for undirected graphs (a.k.a simple graphs).
 
-I aim to create a Java program that solves this problem concurrently.
+The code is complete except for the implementation of the data structure that represents the graphs. Three variants are provided and can be selected at runtime: the Coordinate formate (COO), the Compressed Sparse Rows format (CSR) and the Compressed Sparse Columsn format (CSC).
+
+Graph data sets are available from http://www.eeecs.qub.ac.uk/~H.Vandierendonck/CSC3021/graphs/. These are specified in the file format described in the assignment brief.
+
+The programs can be called using one of two drivers: DriverA2.java (for DOMjudge submissions for the second assignment) and DriverA3.java (for DOMjudge submissions for the third assignment). These drivers require command-line arguments to specify what to do (the problem: PageRank or Connected Components; the graph data structure; number of threads to use).
+
+Command line arguments are easily specified when running the programs on the command line. For those with a UNIX-like setup, there is also a Makefile to compile the programs and to create a ZIP file for submission on the DOMjudge server.
+
+IDEs also allow to set the programs command-line arguments, which requires a sequence of GUI actions that is more cumbersome. Google the docs for your GUI to find out how; any problems put questions on the Canvas forum.
+
+The command line arguments are as follows:
+
+When compiling the DriverA2 file % javac DriverA2.java % java Driver Usage: java Driver format inputfile algorithm outputfile % java Driver COO /path/to/graph.COO (pr|cc) /path/to/outputfile.txt Replace the path /path/to/graph.COO with the directory and filename for the graph file of your choice. Choose one of pr or cc. Specify a file to store the program output (either PageRank values or histogram of cluster sizes). This code will execute the program on a single thread of execution.
+
+When compiling the DriverA3 file % javac DriverA3.java % java Driver Usage: java Driver inputfile-COO inputfile-CSR inputfile-CSC algorithm num-threads outputfile % java Driver /path/to/graph.COO /path/to/graph.CSR /path/to/graph.CSC (pr|cc) 8 /path/to/outputfile.txt
